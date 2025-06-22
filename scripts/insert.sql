@@ -196,3 +196,29 @@ INSERT INTO `Review` (`review_id`, `order_id`, `reviewer_id`, `rating`, `comment
 (5, 6, 2, 5, 'Exactly as described. Thank you!'),
 (6, 8, 4, 5, '一次買了兩本，都很滿意，謝謝！'),
 (7, 9, 5, 4, '書本比想像中舊一點，但還在可接受範圍。');
+
+-- 14. 更新 Order 的 created_at
+-- 將訂單建立時間更新為對應商品刊登時間的幾天後，以模擬真實銷售週期
+UPDATE `Order` o
+JOIN `OrderItem` oi ON o.order_id = oi.order_id
+JOIN `Listing` l ON oi.listing_id = l.listing_id
+SET o.created_at = l.created_at + INTERVAL 5 DAY
+WHERE o.order_id IN (1, 6);
+
+UPDATE `Order` o
+JOIN `OrderItem` oi ON o.order_id = oi.order_id
+JOIN `Listing` l ON oi.listing_id = l.listing_id
+SET o.created_at = l.created_at + INTERVAL 12 DAY
+WHERE o.order_id IN (2, 8);
+
+UPDATE `Order` o
+JOIN `OrderItem` oi ON o.order_id = oi.order_id
+JOIN `Listing` l ON oi.listing_id = l.listing_id
+SET o.created_at = l.created_at + INTERVAL 22 DAY
+WHERE o.order_id IN (3, 9);
+
+UPDATE `Order` o
+JOIN `OrderItem` oi ON o.order_id = oi.order_id
+JOIN `Listing` l ON oi.listing_id = l.listing_id
+SET o.created_at = l.created_at + INTERVAL 35 DAY
+WHERE o.order_id IN (4, 10);
